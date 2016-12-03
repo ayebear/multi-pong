@@ -7,7 +7,7 @@ import uglify from 'rollup-plugin-uglify'
 
 let includePathOptions = {
 	include: {},
-	paths: ['src'],
+	paths: ['src', 'src/systems'],
 	external: [],
 	extensions: ['.js']
 }

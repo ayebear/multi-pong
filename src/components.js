@@ -12,22 +12,32 @@ state.world.component('velocity', function(x, y) {
 })
 
 // Pixi sprite - used with ZIndex class - instance in state
-state.world.component('sprite', function(container, name, zIndex) {
-	this.s = new PIXI.Sprite(PIXI.utils.TextureCache[name + '.png'])
-	this.s.anchor.x = 0.5
-	this.s.anchor.y = 0.5
-	this.s.zIndex = zIndex || 0
-	container.addChild(this.s)
-	updateZIndex(container)
+// state.world.component('sprite', function(container, name, zIndex) {
+// 	this.s = new PIXI.Sprite(PIXI.utils.TextureCache[name + '.png'])
+// 	this.s.anchor.x = 0.5
+// 	this.s.anchor.y = 0.5
+// 	this.s.zIndex = zIndex || 0
+// 	container.addChild(this.s)
+// 	updateZIndex(container)
 
-	this.onRemove = () => {
-		container.removeChild(this.s)
-	}
+// 	this.onRemove = () => {
+// 		container.removeChild(this.s)
+// 	}
 
-	// Set texture from name
-	this.set = (name) => {
-		this.s.texture = PIXI.utils.TextureCache[name + '.png']
-	}
+// 	// Set texture from name
+// 	this.set = (name) => {
+// 		this.s.texture = PIXI.utils.TextureCache[name + '.png']
+// 	}
+// })
+
+// For pixi.graphics shapes
+state.world.component('shape', function(container, shape) {
+	this.shape = shape
+	container.addChild(shape)
+})
+
+state.world.component('force', function(force) {
+	this.force = force || 0
 })
 
 state.world.component('mass', function(mass) {
@@ -39,7 +49,8 @@ state.world.component('aabb', function(position, size, offset) {
 })
 
 state.world.component('lineSegment', function(direction, length) {
-
+	this.direction = direction
+	this.length = length
 })
 
 state.world.component('collisions', function() {
@@ -49,3 +60,15 @@ state.world.component('collisions', function() {
 state.world.component('puck')
 state.world.component('player')
 state.world.component('goal')
+
+state.world.component('pixiStage', function(stage) {
+	this.root = stage
+})
+
+state.world.component('inputTranslational', function(force) {
+	this.force = force
+})
+
+state.world.component('inputRotational', function() {
+
+})
