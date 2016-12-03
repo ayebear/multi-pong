@@ -1,0 +1,19 @@
+{
+  "name": "multi-pong",
+  "version": "1.0.0",
+  "description": "Multiplayer polygonal pong - or maybe something else like a time traveling soccer game?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayebear/multi-pong.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ayebear/multi-pong/issues"
+  },
+  "homepage": "https://github.com/ayebear/multi-pong#readme"
+}
