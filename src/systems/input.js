@@ -1,7 +1,7 @@
 import * as state from 'state'
 import Mousetrap from 'mousetrap'
 
-state.world.system([], class {
+state.world.system(['inputTranslational', 'force'], class {
 	constructor() {
 		this.moveDelta = {}
 		this.keys = {}
@@ -29,10 +29,12 @@ state.world.system([], class {
 		}
 	}
 
-	every(input, velocity) {
+	every(input, force) {
 		// Set force based on input
 		// velocity.x = this.moveDelta.x * input.speed
 		// velocity.y = this.moveDelta.y * input.speed
+		force.x = this.moveDelta.x * input.force
+		force.y = this.moveDelta.y * input.force
 	}
 
 	makeKey(deltaX, deltaY) {

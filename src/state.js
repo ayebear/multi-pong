@@ -19,8 +19,8 @@ stage.addChild(uiStage)
 let network = {}
 
 let gameSize = {
-	width: 1600,
-	height: 900
+	width: 800,
+	height: 600
 }
 
 export { world, dt, stage, bgStage, gameStage, uiStage, network, gameSize }

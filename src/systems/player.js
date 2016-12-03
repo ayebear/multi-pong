@@ -5,10 +5,10 @@ state.world.system([], class {
 		console.log('player init()')
 
 		let pos = {
-			x: 200,
-			y: 200
+			x: 100,
+			y: 100
 		}
-		let radius = 100
+		let radius = 32
 		let graphics = new PIXI.Graphics()
 		graphics.beginFill(0xFFFFFF)
 		graphics.drawCircle(pos.x, pos.y, radius)
@@ -20,7 +20,7 @@ state.world.system([], class {
 		ent.set('position', pos.x, pos.y)
 			.set('velocity')
 			.set('force')
-			.set('mass')
+			.set('mass', 50)
 			.set('shape', state.gameStage, graphics)
 			.set('inputTranslational', 200)
 			.set('player')
