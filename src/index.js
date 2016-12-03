@@ -1,7 +1,7 @@
 import * as state from 'state'
 import 'components'
 
-let socket = io('http://localhost:3000')
+// let socket = io('http://localhost:3000')
 
 // Import systems here
 import 'network'
@@ -13,22 +13,23 @@ import 'render'
 
 let lastTime = 0.0
 
-function load() {
-	// Load textures
-	let loader = PIXI.loader
-	// loader.add('textures', 'data/textures.json')
+// function load() {
+// 	// Load textures
+// 	let loader = PIXI.loader
+// 	// loader.add('textures', 'data/textures.json')
 
-	// Start when done loading
-	loader.load(start)
-}
+// 	// Start when done loading
+// 	loader.load(start)
+// }
 
 // Initialize systems and start the main loop
 function start() {
-	socket.on('joined', function(joinedData) {
-		state.network.playerId = joinedData.playerId
+	// socket.on('joined', function(joinedData) {
+		// state.network.playerId = joinedData.playerId
+		console.log('start()')
 		state.world.init()
 		requestAnimationFrame(gameLoop)
-	})
+	// })
 }
 
 function gameLoop(time) {
@@ -42,4 +43,4 @@ function gameLoop(time) {
 	requestAnimationFrame(gameLoop)
 }
 
-load()
+start()

@@ -10,18 +10,13 @@ state.world.system([], class {
 	}
 
 	pre() {
-		// Handle resetKeys events
-		events.process('resetKeys', () => {this.resetKeys()})
-
 		// Process keyboard input
-		if (!this.touching) {
-			this.moveDelta = {x: 0, y: 0}
-			for (let name in this.keys) {
-				let key = this.keys[name]
-				if (key.down) {
-					this.moveDelta.x += key.delta.x
-					this.moveDelta.y += key.delta.y
-				}
+		this.moveDelta = {x: 0, y: 0}
+		for (let name in this.keys) {
+			let key = this.keys[name]
+			if (key.down) {
+				this.moveDelta.x += key.delta.x
+				this.moveDelta.y += key.delta.y
 			}
 		}
 
@@ -36,12 +31,8 @@ state.world.system([], class {
 
 	every(input, velocity) {
 		// Set force based on input
-		velocity.x = this.moveDelta.x * input.speed
-		velocity.y = this.moveDelta.y * input.speed
-
-		// Set last direction
-		input.lastDirection.x = this.lastMoveDelta.x
-		input.lastDirection.y = this.lastMoveDelta.y
+		// velocity.x = this.moveDelta.x * input.speed
+		// velocity.y = this.moveDelta.y * input.speed
 	}
 
 	makeKey(deltaX, deltaY) {

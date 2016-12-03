@@ -29,7 +29,7 @@ export default {
 			include: 'node_modules/**'
 		}),
 		json(),
-		babel(),
-		uglify()
+		babel()
+		// uglify()
 	]
 }

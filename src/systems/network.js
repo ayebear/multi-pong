@@ -6,13 +6,13 @@ state.world.system([], class {
 		this.updateQueue = []
 		this.destroyQueue = []
 
-		state.network.socket.on('updateEntities', (data) => {
-			this.updateQueue.push(data)
-		})
+		// state.network.socket.on('updateEntities', (data) => {
+		// 	this.updateQueue.push(data)
+		// })
 
-		state.network.socket.on('destroyEntity', (data) => {
-			this.destroyQueue.push(data)
-		})
+		// state.network.socket.on('destroyEntity', (data) => {
+		// 	this.destroyQueue.push(data)
+		// })
 	}
 
 	pre() {
