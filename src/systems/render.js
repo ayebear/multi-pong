@@ -8,7 +8,7 @@ state.world.system(['pixiStage'], class {
 
 	init() {
 		// Setup pixi renderer and add to page
-		this.renderer = PIXI.autoDetectRenderer(state.gameSize.width, state.gameSize.height, {antialias: false})
+		this.renderer = PIXI.autoDetectRenderer(state.gameSize.width, state.gameSize.height, {antialias: true})
 		document.body.appendChild(this.renderer.view)
 
 		// Add entity with pixi stage

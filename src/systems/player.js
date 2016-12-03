@@ -15,18 +15,18 @@ state.world.system([], class {
 		graphics.endFill()
 
 		// Create player
-		state.network.playerId = '5'
+		// state.network.playerId = '5'
 		let ent = state.world.entity(state.network.playerId)
 		ent.set('position', pos.x, pos.y)
 			.set('velocity')
 			.set('force')
-			.set('mass', 50)
+			.set('mass', 1)
 			.set('shape', state.gameStage, graphics)
-			.set('inputTranslational', 200)
+			.set('inputTranslational', 800)
 			.set('player')
 
 		// Link shape position with position component
-		ent.get('shape').shape.position = ent.get('position')
+		// ent.get('shape').shape.position = ent.get('position')
 
 		console.log(ent)
 

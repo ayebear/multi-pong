@@ -9,6 +9,7 @@ import 'player'
 import 'input'
 import 'forces'
 import 'movement'
+import 'view'
 import 'render'
 
 let lastTime = 0.0
