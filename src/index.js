@@ -2,7 +2,7 @@ import * as state from 'state'
 import 'components'
 
 // Import systems here
-import 'movement'
+// import 'movement'
 
 let lastTime = 0.0
 
