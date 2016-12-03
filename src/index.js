@@ -1,7 +1,6 @@
 import * as state from 'state'
 import 'components'
 
-let socket = io('http://localhost:3000')
 
 // Import systems here
 import 'network'
@@ -24,9 +23,10 @@ function load() {
 
 // Initialize systems and start the main loop
 function start() {
-	socket.on('joined', function(joinedData) {
-		state.network.playerId = joinedData.playerId
+	state.network.socket.on('joined', function(joinedData) {
+		state.network.onJoin(joinedData.id, joinedData.entityList)
 		state.world.init()
+
 		requestAnimationFrame(gameLoop)
 	})
 }
