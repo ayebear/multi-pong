@@ -28,7 +28,7 @@ function start() {
 		state.world.init()
 
 		requestAnimationFrame(gameLoop)
-	// })
+	})
 }
 
 function gameLoop(time) {

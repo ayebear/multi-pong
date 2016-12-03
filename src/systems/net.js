@@ -1,6 +1,7 @@
 export default class Network {
 	constructor(socket, world) {
 		this.socket = socket
+		this.world = world
 
 		this.updateQueue = []
 		this.destroyQueue = []
@@ -13,7 +14,6 @@ export default class Network {
 		socket.on('destroyEntities', (entityList) => {
 			this.destroyQueue.push(entityList)
 		})
-
 	}
 
 	updateEntities(entityList) {
@@ -27,40 +27,43 @@ export default class Network {
 	onJoin(entityId, entityList) {
 		this.playerId = entityId
 		for (let entity of entityList) {
-			updateEntity(entity)
+			this.updateEntity(entity)
 		}
 	}
 
 	updateEntity(entityData) {
-		if (!(entityData['id'] in entityIdToEntity)) {
-			entityIdToEntity[entityData['id']] = state.world.entity()
+		if (!(entityData['id'] in this.entityIdToEntity)) {
+			this.entityIdToEntity[entityData['id']] = this.world.entity()
 		}
-		let entity = entityIdToEntity[entityData['id']]
+		let entity = this.entityIdToEntity[entityData['id']]
 
-		entity.parse(entityData['update'])
-		for (let componentToRemove of entityData['remove']) {
-			entity.remove(componentToRemove)
+		// entity.parse(entityData['update'].toJson())
+		entity.update(entityData['update'])
+		if ('remove' in entityData) {
+			for (let componentToRemove of entityData['remove']) {
+				entity.remove(componentToRemove)
+			}
 		}
 	}
 
 	destroyEntity(entityData) {
 
-		if (entityData['id'] in entityIdToEntity) {
-			let entity = entityIdToEntity[entityData['id']]
+		if (entityData['id'] in this.entityIdToEntity) {
+			let entity = this.entityIdToEntity[entityData['id']]
 			entity.destroy()
 		}
 	}
 
 	//loop through queues and handle entity actions
 	update() {
-		while (updateQueue.length > 0) {
-			let entityData = updateQueue.pop()
-			updateEntity(entityData)
+		while (this.updateQueue.length > 0) {
+			let entityData = this.updateQueue.pop()
+			this.updateEntity(entityData)
 		}
 
-		while (destroyQueue.length > 0) {
-			let entityData = destroyQueue.pop()
-			destroyEntity(entityData)
+		while (this.destroyQueue.length > 0) {
+			let entityData = this.destroyQueue.pop()
+			this.destroyEntity(entityData)
 		}
 	}
 }

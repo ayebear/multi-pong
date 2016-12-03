@@ -1,5 +1,5 @@
 import {World} from 'picoes'
-import Network from 'Network'
+import Network from 'net.js'
 
 let world = new World()
 let dt = {
