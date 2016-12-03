@@ -1,8 +1,8 @@
 import * as state from 'state'
 
-state.world.system(['postion', 'velocity'], class {
-	every(postion, velocity) {
-		postion.x += velocity.x * state.dt.val
-		postion.y += velocity.y * state.dt.val
+state.world.system(['position', 'velocity'], class {
+	every(position, velocity) {
+		position.x += velocity.x * state.dt.val
+		position.y += velocity.y * state.dt.val
 	}
 })

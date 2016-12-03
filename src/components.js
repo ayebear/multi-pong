@@ -11,6 +11,11 @@ state.world.component('velocity', function(x, y) {
 	this.y = y || 0
 })
 
+state.world.component('force', function(x, y) {
+	this.x = x || 0
+	this.y = y || 0
+})
+
 // Pixi sprite - used with ZIndex class - instance in state
 // state.world.component('sprite', function(container, name, zIndex) {
 // 	this.s = new PIXI.Sprite(PIXI.utils.TextureCache[name + '.png'])
@@ -34,10 +39,6 @@ state.world.component('velocity', function(x, y) {
 state.world.component('shape', function(container, shape) {
 	this.shape = shape
 	container.addChild(shape)
-})
-
-state.world.component('force', function(force) {
-	this.force = force || 0
 })
 
 state.world.component('mass', function(mass) {

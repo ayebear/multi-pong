@@ -28,8 +28,8 @@ export default {
 			ignoreGlobal: true,
 			include: 'node_modules/**'
 		}),
-		json(),
-		babel(),
-		uglify()
+		json()
+		// babel()
+		// uglify()
 	]
 }

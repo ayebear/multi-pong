@@ -12,14 +12,14 @@ import 'render'
 
 let lastTime = 0.0
 
-function load() {
-	// Load textures
-	let loader = PIXI.loader
-	// loader.add('textures', 'data/textures.json')
+// function load() {
+// 	// Load textures
+// 	let loader = PIXI.loader
+// 	// loader.add('textures', 'data/textures.json')
 
-	// Start when done loading
-	loader.load(start)
-}
+// 	// Start when done loading
+// 	loader.load(start)
+// }
 
 // Initialize systems and start the main loop
 function start() {
@@ -28,7 +28,7 @@ function start() {
 		state.world.init()
 
 		requestAnimationFrame(gameLoop)
-	})
+	// })
 }
 
 function gameLoop(time) {
@@ -42,4 +42,4 @@ function gameLoop(time) {
 	requestAnimationFrame(gameLoop)
 }
 
-load()
+start()
