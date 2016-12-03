@@ -13,7 +13,7 @@ state.world.system([], class {
 		graphics.endFill()
 
 		// Create player
-		let ent = state.world.entity(state.playerId)
+		let ent = state.world.entity(state.network.playerId)
 		ent.set('position')
 			.set('velocity')
 			.set('shape', state.gameStage, graphics)

@@ -16,13 +16,11 @@ stage.addChild(bgStage)
 stage.addChild(gameStage)
 stage.addChild(uiStage)
 
-let socket = {}
-
-let playerId = {}
+let network = {}
 
 let gameSize = {
 	width: 1600,
 	height: 900
 }
 
-export { world, dt, stage, bgStage, gameStage, uiStage, socket, playerId }
+export { world, dt, stage, bgStage, gameStage, uiStage, network, gameSize }

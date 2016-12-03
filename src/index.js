@@ -25,7 +25,7 @@ function load() {
 // Initialize systems and start the main loop
 function start() {
 	socket.on('joined', function(joinedData) {
-		state.playerId = joinedData.playerId
+		state.network.playerId = joinedData.playerId
 		state.world.init()
 		requestAnimationFrame(gameLoop)
 	})
