@@ -1,4 +1,5 @@
 import {World} from 'picoes'
+import Network from 'net.js'
 
 let world = new World()
 let dt = {
@@ -16,7 +17,9 @@ stage.addChild(bgStage)
 stage.addChild(gameStage)
 stage.addChild(uiStage)
 
-let network = {}
+
+let socket = io('http://localhost:3000')
+let network = new Network(socket, world)
 
 let gameSize = {
 	width: 800,
