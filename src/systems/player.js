@@ -8,7 +8,7 @@ state.world.system([], class {
 			x: 100,
 			y: 100
 		}
-		let radius = 32
+		let radius = 16
 		let graphics = new PIXI.Graphics()
 		graphics.beginFill(0xFFFFFF)
 		graphics.drawCircle(pos.x, pos.y, radius)
@@ -25,11 +25,12 @@ state.world.system([], class {
 			.set('inputTranslational', 800)
 			.set('player')
 
-		// Link shape position with position component
-		// ent.get('shape').shape.position = ent.get('position')
-
+		console.log('Player created:')
 		console.log(ent)
 
-		// state.network.updateEntites(playerEntity)
+		state.network.updateEntities([{
+			id: state.network.playerId,
+			update: JSON.parse(entity.toString())
+		}])
 	}
 })
