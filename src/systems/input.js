@@ -29,12 +29,19 @@ state.world.system(['inputTranslational', 'force'], class {
 		}
 	}
 
-	every(input, force) {
+	every(input, force, ent) {
 		// Set force based on input
-		// velocity.x = this.moveDelta.x * input.speed
-		// velocity.y = this.moveDelta.y * input.speed
+		let oldForce = {
+			x: force.x,
+			y: force.y
+		}
 		force.x = this.moveDelta.x * input.force
 		force.y = this.moveDelta.y * input.force
+
+		// Update position and force components if user input changes
+		if (force.x !== oldForce.x || force.y !== oldForce.y) {
+			state.network.updateEntities([ent], {update: ['position', 'force']})
+		}
 	}
 
 	makeKey(deltaX, deltaY) {

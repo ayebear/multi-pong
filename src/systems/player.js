@@ -24,12 +24,7 @@ state.world.system([], class {
 		console.log('Player created:')
 		console.log(ent)
 
-		let serializedData = JSON.parse(ent.toString())
-		delete serializedData['inputTranslational']
-
-		state.network.updateEntities([{
-			id: state.network.playerId,
-			update: serializedData
-		}])
+		let components = Object.keys(ent.data).filter(compName => compName !== 'inputTranslational')
+		state.network.updateEntities([ent], {update: components})
 	}
 })
