@@ -40,7 +40,7 @@ state.world.system(['inputTranslational', 'force'], class {
 
 		// Update position and force components if user input changes
 		if (force.x !== oldForce.x || force.y !== oldForce.y) {
-			state.network.updateEntities([ent], {update: ['position', 'force']})
+			state.network.updateEntities([ent], {update: ['position', 'force', 'velocity']})
 		}
 	}
 

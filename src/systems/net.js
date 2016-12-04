@@ -86,9 +86,6 @@ export default class Network {
 			}
 			let entity = this.entityIdToEntity[entityData['id']]
 
-			// entity.parse(entityData['update'].toJson())
-			// console.log("entityData['update']")
-			// console.log(entityData['update'])
 			for (let compName in entityData['update']) {
 				let comp = entity.access(compName)
 				if (typeof comp.fromJSON === 'function') {
