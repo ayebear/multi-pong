@@ -40,5 +40,6 @@ state.world.system(['position', 'velocity', 'collidable'], class {
 		velocity.x *= newMagnitude
 		velocity.y *= newMagnitude
 		console.log('old: ' + magnitude + ', new: ' + newMagnitude)
+		// TODO: Send entity update packet here
 	}
 })

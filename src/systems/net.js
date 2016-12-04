@@ -74,33 +74,33 @@ export default class Network {
 		console.log('onJoin()')
 		console.log(entityList)
 		this.playerId = entityId
-		for (let entity of entityList) {
-			this.updateEntity(entity)
-		}
+		this.updateEntityArray(entityList)
 	}
 
-	updateEntity(entityData) {
-		if (!(entityData['id'] in this.entityIdToEntity)) {
-			let newEntity = this.world.entity()
-			this.entityIdToEntity[entityData['id']] = newEntity
-			this.internalEidToEntityId[newEntity.id] = entityData['id']
-		}
-		let entity = this.entityIdToEntity[entityData['id']]
-
-		// entity.parse(entityData['update'].toJson())
-		console.log("entityData['update']")
-		console.log(entityData['update'])
-		for (let compName in entityData['update']) {
-			let comp = entity.access(compName)
-			if (typeof comp.fromJSON === 'function') {
-				comp.fromJSON(entityData['update'][compName])
-			} else {
-				entity.update(compName, entityData['update'][compName])
+	updateEntityArray(entityArray) {
+		for (let entityData of entityArray) {
+			if (!(entityData['id'] in this.entityIdToEntity)) {
+				let newEntity = this.world.entity()
+				this.entityIdToEntity[entityData['id']] = newEntity
+				this.internalEidToEntityId[newEntity.id] = entityData['id']
 			}
-		}
-		if ('remove' in entityData) {
-			for (let componentToRemove of entityData['remove']) {
-				entity.remove(componentToRemove)
+			let entity = this.entityIdToEntity[entityData['id']]
+
+			// entity.parse(entityData['update'].toJson())
+			// console.log("entityData['update']")
+			// console.log(entityData['update'])
+			for (let compName in entityData['update']) {
+				let comp = entity.access(compName)
+				if (typeof comp.fromJSON === 'function') {
+					comp.fromJSON(entityData['update'][compName])
+				} else {
+					entity.update(compName, entityData['update'][compName])
+				}
+			}
+			if ('remove' in entityData) {
+				for (let componentToRemove of entityData['remove']) {
+					entity.remove(componentToRemove)
+				}
 			}
 		}
 	}
@@ -119,7 +119,7 @@ export default class Network {
 	update() {
 		while (this.updateQueue.length > 0) {
 			let entityData = this.updateQueue.pop()
-			this.updateEntity(entityData)
+			this.updateEntityArray(entityData)
 		}
 
 		while (this.destroyQueue.length > 0) {

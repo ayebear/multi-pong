@@ -62,7 +62,7 @@ state.world.component('sprite', function(container, name, zIndex) {
 
 	// Set texture from name
 	this.set = (name) => {
-		this.s.texture.from('data/' + name + '.png')
+		this.s.texture = PIXI.utils.TextureCache['data/' + name + '.png']
 		this.name = name
 	}
 
