@@ -13,14 +13,18 @@ import 'render'
 
 let lastTime = 0.0
 
-// function load() {
-// 	// Load textures
-// 	let loader = PIXI.loader
-// 	// loader.add('textures', 'data/textures.json')
+function load() {
+	// Load textures
+	let loader = PIXI.loader
+	loader.add('ball', 'data/ball.png')
+	loader.add('goal', 'data/goal.png')
+	loader.add('bg-ice', 'data/bg-ice.png')
+	loader.add('puck', 'data/puck.png')
+	state.bgStage.addChild(new PIXI.Sprite.fromImage('data/bg-ice.png'))
 
-// 	// Start when done loading
-// 	loader.load(start)
-// }
+	// Start when done loading
+	loader.load(start)
+}
 
 // Initialize systems and start the main loop
 function start() {
@@ -43,4 +47,4 @@ function gameLoop(time) {
 	requestAnimationFrame(gameLoop)
 }
 
-start()
+load()
