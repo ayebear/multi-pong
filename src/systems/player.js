@@ -11,7 +11,7 @@ state.world.system([], class {
 
 		// Create player
 		// state.network.playerId = '5'
-		let ent = state.world.entity(state.network.playerId)
+		let ent = state.world.entity()
 		ent.set('position', pos.x, pos.y)
 			.set('velocity')
 			.set('force')

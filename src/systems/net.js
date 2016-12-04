@@ -6,6 +6,7 @@ export default class Network {
 		this.updateQueue = []
 		this.destroyQueue = []
 		this.entityIdToEntity = {}
+		this.internalEidToEntityId = {}
 
 		socket.on('updateEntities', (entityList) => {
 			this.updateQueue.push(entityList)
@@ -16,8 +17,49 @@ export default class Network {
 		})
 	}
 
-	updateEntities(entityList) {
-		this.socket.emit('updateEntities', entityList)
+	updateEntities(entities, updateActions) {
+		// if ('update' in updateActions || 'remove' in updateActions) {
+		console.log('update entities')
+		console.log(entities)
+		console.log(updateActions)
+		let sendEvent = false
+		let entityList = []
+		for (let entity of entities) {
+			let id = null
+			if (entity['id'] in this.internalEidToEntityId) {
+				id = this.internalEidToEntityId[entity['id']]
+			}
+			let updateEntityData = {
+				'id': id,
+				'update': {},
+				'remove': []
+			}
+
+			if ('update' in updateActions) {
+				for (let componentName of updateActions['update']) {
+					let component = entity.get(componentName)
+					if (component) {
+						sendEvent = true
+						updateEntityData['update'][componentName] = JSON.stringify(component)
+					}
+				}
+			}
+
+			if ('remove' in updateActions) {
+				for (let componentName of updateActions['remove']) {
+					sendEvent = true
+					updateEntityData['remove'].push(componentName)
+				}
+			}
+
+			entityList.push(updateEntityData)
+		}
+
+		if (sendEvent) {
+			this.socket.emit('updateEntities', entityList)
+		}
+
+		// }
 	}
 
 	destroyEntities(entityList) {
@@ -35,7 +77,9 @@ export default class Network {
 
 	updateEntity(entityData) {
 		if (!(entityData['id'] in this.entityIdToEntity)) {
-			this.entityIdToEntity[entityData['id']] = this.world.entity()
+			let newEntity = this.world.entity()
+			this.entityIdToEntity[entityData['id']] = newEntity
+			this.internalEidToEntityId[newEntity.id] = entityData['id'] 
 		}
 		let entity = this.entityIdToEntity[entityData['id']]
 
@@ -61,6 +105,8 @@ export default class Network {
 
 		if (entityData['id'] in this.entityIdToEntity) {
 			let entity = this.entityIdToEntity[entityData['id']]
+			delete this.internalEidToEntityId[entity['id']]
+			delete this.entityIdToEntity[entityData['id']]
 			entity.destroy()
 		}
 	}
