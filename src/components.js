@@ -18,13 +18,21 @@ state.world.component('force', function(x, y) {
 
 // Pixi sprite - used with ZIndex class - instance in state
 state.world.component('sprite', function(container, name, zIndex) {
-	this.s = new PIXI.Sprite.fromImage('data/' + name + '.png')
-	this.s.anchor.x = 0.5
-	this.s.anchor.y = 0.5
-	this.s.zIndex = zIndex || 0
-	this.name = name
-	container.addChild(this.s)
-	updateZIndex(container)
+	this.create = (container, name, zIndex) => {
+		if (container && name) {
+			this.s = new PIXI.Sprite.fromImage('data/' + name + '.png')
+			this.s.anchor.x = 0.5
+			this.s.anchor.y = 0.5
+			this.s.zIndex = zIndex || 0
+			this.name = name
+			container.addChild(this.s)
+			updateZIndex(container)
+		} else {
+			this.s = undefined
+			this.container = undefined
+			console.log('Sprite created without parameters')
+		}
+	}
 
 	this.onRemove = () => {
 		container.removeChild(this.s)
@@ -32,8 +40,17 @@ state.world.component('sprite', function(container, name, zIndex) {
 
 	// {'texture': 'ball'}
 	this.fromJSON = (data) => {
+		console.log('fromJSON(' + JSON.stringify(data) + ')')
 		if (data.texture) {
-			this.set(data.texture)
+			if (this.s) {
+				this.set(data.texture)
+				console.log('Set texture')
+			} else {
+				this.create(state.gameStage, data.texture)
+				console.log('Created sprite')
+			}
+		} else {
+			console.log('Warning: data.texture is undefined')
 		}
 	}
 
@@ -48,6 +65,8 @@ state.world.component('sprite', function(container, name, zIndex) {
 		this.s.texture.from('data/' + name + '.png')
 		this.name = name
 	}
+
+	this.create(container, name, zIndex)
 })
 
 // For pixi.graphics shapes

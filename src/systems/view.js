@@ -9,7 +9,9 @@ state.world.system(['position', 'shape'], class {
 
 state.world.system(['position', 'sprite'], class {
 	every(position, sprite) {
-		sprite.s.position.x = position.x
-		sprite.s.position.y = position.y
+		if (sprite.s) {
+			sprite.s.position.x = position.x
+			sprite.s.position.y = position.y
+		}
 	}
 })

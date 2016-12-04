@@ -17,11 +17,11 @@ export default class Network {
 	}
 
 	updateEntities(entityList) {
-		this.socket.emit(entityList)
+		this.socket.emit('updateEntities', entityList)
 	}
 
 	destroyEntities(entityList) {
-		this.socket.emit(entityList)
+		this.socket.emit('destroyEntities', entityList)
 	}
 
 	onJoin(entityId, entityList) {
@@ -40,8 +40,15 @@ export default class Network {
 		let entity = this.entityIdToEntity[entityData['id']]
 
 		// entity.parse(entityData['update'].toJson())
-		for (let comp in entityData['update']) {
-			entity.update(comp, entityData['update'][comp])
+		console.log("entityData['update']")
+		console.log(entityData['update'])
+		for (let compName in entityData['update']) {
+			let comp = entity.get(compName)
+			if (comp && typeof comp.fromJSON === 'function') {
+				comp.fromJSON(entityData['update'][compName])
+			} else {
+				entity.update(compName, entityData['update'][compName])
+			}
 		}
 		if ('remove' in entityData) {
 			for (let componentToRemove of entityData['remove']) {
