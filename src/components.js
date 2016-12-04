@@ -22,6 +22,7 @@ state.world.component('sprite', function(container, name, zIndex) {
 	this.s.anchor.x = 0.5
 	this.s.anchor.y = 0.5
 	this.s.zIndex = zIndex || 0
+	this.name = name
 	container.addChild(this.s)
 	updateZIndex(container)
 
@@ -29,10 +30,24 @@ state.world.component('sprite', function(container, name, zIndex) {
 		container.removeChild(this.s)
 	}
 
-	// // Set texture from name
-	// this.set = (name) => {
-	// 	this.s.texture = PIXI.utils.TextureCache[name + '.png']
-	// }
+	// {'texture': 'ball'}
+	this.fromJSON = (data) => {
+		if (data.texture) {
+			this.set(data.texture)
+		}
+	}
+
+	this.toJSON = () => {
+		return {
+			'texture': this.name
+		}
+	}
+
+	// Set texture from name
+	this.set = (name) => {
+		this.s.texture.from('data/' + name + '.png')
+		this.name = name
+	}
 })
 
 // For pixi.graphics shapes

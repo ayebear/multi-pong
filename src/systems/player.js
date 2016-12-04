@@ -24,9 +24,9 @@ state.world.system([], class {
 		console.log('Player created:')
 		console.log(ent)
 
-		// state.network.updateEntities([{
-		// 	id: state.network.playerId,
-		// 	update: JSON.parse(ent.toString())
-		// }])
+		state.network.updateEntities([{
+			id: state.network.playerId,
+			update: JSON.parse(ent.toString())
+		}])
 	}
 })

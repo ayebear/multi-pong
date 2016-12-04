@@ -1,7 +1,6 @@
 import * as state from 'state'
 import 'components'
 
-
 // Import systems here
 import 'network'
 import 'player'
@@ -29,7 +28,10 @@ function load() {
 
 // Initialize systems and start the main loop
 function start() {
+	console.log('Waiting to join...')
+	state.network.socket.emit('join', {})
 	state.network.socket.on('joined', function(joinedData) {
+		console.log('Joining...')
 		state.network.onJoin(joinedData.id, joinedData.entityList)
 		state.world.init()
 

@@ -25,6 +25,8 @@ export default class Network {
 	}
 
 	onJoin(entityId, entityList) {
+		console.log('onJoin()')
+		console.log(entityList)
 		this.playerId = entityId
 		for (let entity of entityList) {
 			this.updateEntity(entity)
@@ -38,7 +40,9 @@ export default class Network {
 		let entity = this.entityIdToEntity[entityData['id']]
 
 		// entity.parse(entityData['update'].toJson())
-		entity.update(entityData['update'])
+		for (let comp in entityData['update']) {
+			entity.update(comp, entityData['update'][comp])
+		}
 		if ('remove' in entityData) {
 			for (let componentToRemove of entityData['remove']) {
 				entity.remove(componentToRemove)
