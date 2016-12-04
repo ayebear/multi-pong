@@ -17,23 +17,23 @@ state.world.component('force', function(x, y) {
 })
 
 // Pixi sprite - used with ZIndex class - instance in state
-// state.world.component('sprite', function(container, name, zIndex) {
-// 	this.s = new PIXI.Sprite(PIXI.utils.TextureCache[name + '.png'])
-// 	this.s.anchor.x = 0.5
-// 	this.s.anchor.y = 0.5
-// 	this.s.zIndex = zIndex || 0
-// 	container.addChild(this.s)
-// 	updateZIndex(container)
+state.world.component('sprite', function(container, name, zIndex) {
+	this.s = new PIXI.Sprite.fromImage('data/' + name + '.png')
+	this.s.anchor.x = 0.5
+	this.s.anchor.y = 0.5
+	this.s.zIndex = zIndex || 0
+	container.addChild(this.s)
+	updateZIndex(container)
 
-// 	this.onRemove = () => {
-// 		container.removeChild(this.s)
-// 	}
+	this.onRemove = () => {
+		container.removeChild(this.s)
+	}
 
-// 	// Set texture from name
-// 	this.set = (name) => {
-// 		this.s.texture = PIXI.utils.TextureCache[name + '.png']
-// 	}
-// })
+	// // Set texture from name
+	// this.set = (name) => {
+	// 	this.s.texture = PIXI.utils.TextureCache[name + '.png']
+	// }
+})
 
 // For pixi.graphics shapes
 state.world.component('shape', function(container, shape) {

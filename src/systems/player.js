@@ -8,11 +8,7 @@ state.world.system([], class {
 			x: 100,
 			y: 100
 		}
-		let radius = 16
-		let graphics = new PIXI.Graphics()
-		graphics.beginFill(0xFFFFFF)
-		graphics.drawCircle(pos.x, pos.y, radius)
-		graphics.endFill()
+		
 
 		// Create player
 		// state.network.playerId = '5'
@@ -21,16 +17,16 @@ state.world.system([], class {
 			.set('velocity')
 			.set('force')
 			.set('mass', 1)
-			.set('shape', state.gameStage, graphics)
+			.set('sprite', state.gameStage, 'ball')
 			.set('inputTranslational', 800)
 			.set('player')
 
 		console.log('Player created:')
 		console.log(ent)
 
-		state.network.updateEntities([{
-			id: state.network.playerId,
-			update: JSON.parse(entity.toString())
-		}])
+		// state.network.updateEntities([{
+		// 	id: state.network.playerId,
+		// 	update: JSON.parse(ent.toString())
+		// }])
 	}
 })
