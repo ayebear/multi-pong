@@ -28,18 +28,17 @@ state.world.system(['position', 'velocity', 'collidable'], class {
 		return Math.sqrt(vec.x * vec.x + vec.y * vec.y)
 	}
 
-	normalized(vec, magnitude) {
-		return {
-			x: vec.x / magnitude,
-			y: vec.y / magnitude
-		}
+	normalize(vec, magnitude) {
+		vec.x /= magnitude
+		vec.y /= magnitude
 	}
 
 	bounce(velocity, cor) {
 		let magnitude = this.mag(velocity)
-		velocity = this.normalized(velocity, magnitude)
+		this.normalize(velocity, magnitude)
 		let newMagnitude = magnitude * cor
 		velocity.x *= newMagnitude
 		velocity.y *= newMagnitude
+		console.log('old: ' + magnitude + ', new: ' + newMagnitude)
 	}
 })
