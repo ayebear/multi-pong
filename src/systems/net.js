@@ -31,6 +31,7 @@ export default class Network {
 			} else if (isPlayer) {
 				id = this.playerId
 				this.internalEidToEntityId[entity['id']] = id
+				this.entityIdToEntity[id] = entity
 			}
 			let updateEntityData = {
 				'id': id,
