@@ -17,7 +17,7 @@ export default class Network {
 		})
 	}
 
-	updateEntities(entities, updateActions) {
+	updateEntities(entities, updateActions, isPlayer = false) {
 		// if ('update' in updateActions || 'remove' in updateActions) {
 		console.log('update entities')
 		console.log(entities)
@@ -28,6 +28,9 @@ export default class Network {
 			let id = null
 			if (entity['id'] in this.internalEidToEntityId) {
 				id = this.internalEidToEntityId[entity['id']]
+			} else if (isPlayer) {
+				id = this.playerId
+				this.internalEidToEntityId[entity['id']] = id
 			}
 			let updateEntityData = {
 				'id': id,
@@ -40,7 +43,7 @@ export default class Network {
 					let component = entity.get(componentName)
 					if (component) {
 						sendEvent = true
-						updateEntityData['update'][componentName] = JSON.stringify(component)
+						updateEntityData['update'][componentName] = JSON.parse(JSON.stringify(component))
 					}
 				}
 			}
@@ -79,7 +82,7 @@ export default class Network {
 		if (!(entityData['id'] in this.entityIdToEntity)) {
 			let newEntity = this.world.entity()
 			this.entityIdToEntity[entityData['id']] = newEntity
-			this.internalEidToEntityId[newEntity.id] = entityData['id'] 
+			this.internalEidToEntityId[newEntity.id] = entityData['id']
 		}
 		let entity = this.entityIdToEntity[entityData['id']]
 

@@ -25,6 +25,7 @@ state.world.system([], class {
 		console.log(ent)
 
 		let components = Object.keys(ent.data).filter(compName => compName !== 'inputTranslational')
-		state.network.updateEntities([ent], {update: components})
+		console.log(components)
+		state.network.updateEntities([ent], {update: components}, true)
 	}
 })
