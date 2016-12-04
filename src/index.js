@@ -8,6 +8,7 @@ import 'player'
 import 'input'
 import 'forces'
 import 'movement'
+import 'boundaries'
 import 'view'
 import 'render'
 
