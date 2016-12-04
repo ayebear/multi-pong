@@ -36,9 +36,27 @@ state.world.component('sprite', function(container, name, zIndex) {
 })
 
 // For pixi.graphics shapes
-state.world.component('shape', function(container, shape) {
-	this.shape = shape
-	container.addChild(shape)
+state.world.component('shape', function(shape) {
+	if (shape) {
+		this.shape = shape
+		state.gameStage.addChild(shape)
+	} else {
+		this.shape = null
+	}
+
+	this.fromJSON = (str) => {
+		if (!this.shape) {
+			let parsed = JSON.parse(str)
+			let graphics = new PIXI.Graphics()
+			graphics.beginFill(0xFFFFFF)
+			graphics.drawCircle(pos.x, pos.y, radius)
+			graphics.endFill()
+		}
+	}
+
+	this.toJSON = () => {
+
+	}
 })
 
 state.world.component('mass', function(mass) {
@@ -56,6 +74,10 @@ state.world.component('lineSegment', function(direction, length) {
 
 state.world.component('collisions', function() {
 	this.entities = {}
+})
+
+state.world.component('collidable', function(cor) {
+	this.cor = cor || 0.5
 })
 
 state.world.component('puck')

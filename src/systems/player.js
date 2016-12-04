@@ -20,6 +20,7 @@ state.world.system([], class {
 			.set('sprite', state.gameStage, 'ball')
 			.set('inputTranslational', 800)
 			.set('player')
+			.set('collidable')
 
 		console.log('Player created:')
 		console.log(ent)
