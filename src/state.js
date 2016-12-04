@@ -22,8 +22,8 @@ let socket = io('http://localhost:3000')
 let network = new Network(socket, world)
 
 let gameSize = {
-	width: 800,
-	height: 600
+	width: 1320,
+	height: 720
 }
 
 export { world, dt, stage, bgStage, gameStage, uiStage, network, gameSize }
